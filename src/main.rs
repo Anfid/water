@@ -1,7 +1,11 @@
+#![feature(static_nobundle)]
+
 mod midi_box;
 mod music_box;
+mod ui;
 
 use cpal::traits::{DeviceTrait, HostTrait, StreamTrait};
+use iced::{Application, Settings};
 use midi_box::{MidiBox, MidiEvent, MidiMsg};
 use music_box::MusicBox;
 
@@ -62,6 +66,8 @@ where
         err_fn,
     )?;
     stream.play()?;
+
+    ui::Ui::run(Settings::default());
 
     // just let it be
     loop {
